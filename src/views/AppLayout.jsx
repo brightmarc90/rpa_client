@@ -6,7 +6,7 @@ function AppLayout() {
         <nav>
             <ul>
                 <li><NavLink to={"/schools"}>Ecoles</NavLink> </li>
-                <li><NavLink to={"/"}>Formateurs</NavLink> </li>
+                <li><NavLink to={"/trainers"}>Formateurs</NavLink> </li>
                 <li><NavLink to={"/"}>Matières</NavLink> </li>
                 <li><NavLink to={"/"}>Factures</NavLink> </li>
             </ul>
