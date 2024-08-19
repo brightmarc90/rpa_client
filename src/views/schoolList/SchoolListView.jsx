@@ -20,7 +20,7 @@ function SchoolListView() {
   return (
     <div>
       <h1>Liste de écoles</h1>
-      {schoolList && (
+      {schoolList.length > 0  && (
         <div>
           <table>
             <thead>
@@ -40,6 +40,9 @@ function SchoolListView() {
           </table>
         </div>
       )}
+      {
+        schoolList.length == 0 && <p>Aucun résultat</p>
+      }
     </div>
   );
 }
