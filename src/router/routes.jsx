@@ -3,6 +3,7 @@ import { createBrowserRouter } from "react-router-dom"
 import AppLayout from "../views/AppLayout"
 import SchoolListView from "../views/schoolList/SchoolListView"
 import TrainerListView from "../views/trainerList/TrainerListView"
+import SubjectListView from "../views/subjectList/SubjectListView"
 
 export default createBrowserRouter([
     {
@@ -16,6 +17,10 @@ export default createBrowserRouter([
             {
                 path: "trainers",
                 element: <TrainerListView />
+            },
+            {
+                path: "subjects",
+                element: <SubjectListView />
             }
         ]
     }

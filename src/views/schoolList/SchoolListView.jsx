@@ -19,7 +19,7 @@ function SchoolListView() {
 
   return (
     <div>
-      <h1>Liste de écoles</h1>
+      <h1>Liste des écoles</h1>
       {schoolList.length > 0  && (
         <div>
           <table>
