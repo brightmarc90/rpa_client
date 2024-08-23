@@ -5,6 +5,7 @@ import SchoolListView from "../views/schoolList/SchoolListView"
 import TrainerListView from "../views/trainerList/TrainerListView"
 import SubjectListView from "../views/subjectList/SubjectListView"
 import UserListView from "../views/userList/UserListView"
+import RoleListView from "../views/roleList/RoleListView"
 
 export default createBrowserRouter([
     {
@@ -26,6 +27,10 @@ export default createBrowserRouter([
             {
                 path: "users",
                 element: <UserListView />
+            },
+            {
+                path: "roles",
+                element: <RoleListView />
             }
         ]
     }
