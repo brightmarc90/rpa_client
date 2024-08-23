@@ -13,7 +13,7 @@ function AppLayout() {
                 <li><NavLink to={"/"}>Bilan Péda. et Fin.</NavLink> </li>
             </ul>
             <ul>
-                <li><NavLink to={"/"}>Rôles</NavLink> </li>
+                <li><NavLink to={"/roles"}>Rôles</NavLink> </li>
                 <li><NavLink to={"/users"}>Utilisateurs</NavLink> </li>
             </ul>
         </nav>
