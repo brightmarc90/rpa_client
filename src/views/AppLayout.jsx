@@ -9,7 +9,7 @@ function AppLayout() {
                 <li><NavLink to={"/schools"}>Ecoles</NavLink> </li>
                 <li><NavLink to={"/trainers"}>Formateurs</NavLink> </li>
                 <li><NavLink to={"/subjects"}>Matières</NavLink> </li>
-                <li><NavLink to={"/"}>Factures</NavLink> </li>
+                <li><NavLink to={"/invoices"}>Factures</NavLink> </li>
                 <li><NavLink to={"/"}>Bilan Péda. et Fin.</NavLink> </li>
             </ul>
             <ul>
