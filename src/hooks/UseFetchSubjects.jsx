@@ -11,11 +11,7 @@ const UseFetchSubjects = () => {
             try {
                 setLoading(true)
                 const response = await getSubjects()
-                if(!response.ok){
-                    throw new Error("Erreur de récupération")
-                }
-                const data = await response.json()
-                setSubjects(data)
+                setSubjects(response.data)
             } catch (err) {
                 setError(err?.message)
             } finally {

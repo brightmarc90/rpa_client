@@ -11,11 +11,7 @@ const UseFetchTrainers = () => {
             try {
                 setLoading(true)
                 const response = await getTrainers()
-                if(!response.ok){
-                    throw new Error("Erreur de récupération")
-                }
-                const data = await response.json()
-                setTrainers(data)
+                setTrainers(response.data)
             } catch (err) {
                 setError(err?.message)
             } finally {

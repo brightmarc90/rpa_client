@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { getSchools } from "../services/api/school"
 
-const UseFetchSchools = async () => {
+const UseFetchSchools = () => {
     const [schools, setSchools] = useState([])
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -11,11 +11,7 @@ const UseFetchSchools = async () => {
             try {
                 setLoading(true)
                 const response = await getSchools()
-                if(!response.ok){
-                    throw new Error("Erreur de récupération")
-                }
-                const data = await response.json()
-                setSchools(data)
+                setSchools(response.data)
             } catch (err) {
                 setError(err?.message)
             } finally {
