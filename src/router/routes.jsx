@@ -6,6 +6,7 @@ import TrainerListView from "../views/trainerList/TrainerListView"
 import SubjectListView from "../views/subjectList/SubjectListView"
 import UserListView from "../views/userList/UserListView"
 import RoleListView from "../views/roleList/RoleListView"
+import InvoiceListView from "../views/invoiceList/InvoiceListView"
 
 export default createBrowserRouter([
     {
@@ -31,6 +32,10 @@ export default createBrowserRouter([
             {
                 path: "roles",
                 element: <RoleListView />
+            },
+            {
+                path: "invoices",
+                element: <InvoiceListView />
             }
         ]
     }
