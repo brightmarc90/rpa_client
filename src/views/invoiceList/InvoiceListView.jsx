@@ -1,29 +1,56 @@
 import { useEffect, useState } from "react";
-import { getInvoices } from "../../services/api/invoice";
+import { getInvoices, getInvoicesBy } from "../../services/api/invoice";
+import InvoiceFilters from "../../components/invoiceFilters/InvoiceFilters";
 
 function InvoiceListView() {
-  const [queryResponse, setQueryResponse] = useState({});
   const [invoiceList, setInvoiceList] = useState([]);
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+
   useEffect(() => {
     const execAsync = async () => {
       try {
+        setLoading(true)
         const response = await getInvoices();
-        setQueryResponse(response)
-        setInvoiceList(queryResponse.data.data);
-        console.log(invoiceList);
-      } catch (error) {
-        const message = error?.message;
-        if (message) console.log(message);
+        setInvoiceList(response.data.data);
+      } catch (err) {
+        setError(err?.message);
+        if (error) console.log(error);
+      } finally {
+        setLoading(false)
       }
     };
     execAsync();
   }, []);
 
+  const applyFilters = (filters) => {
+    const execAsync = async () => {
+        try {
+            setLoading(true)
+            const response = await getInvoicesBy(filters)
+            setInvoiceList(response.data.data);
+        } catch (err) {
+            const errResponse = err?.response
+            if(errResponse?.data){
+                setError(errResponse.data);
+                setInvoiceList([])
+            }
+        } finally {
+            setLoading(false)
+        }
+    }
+    execAsync()
+  }
+
   return (
     <div>
       <h1>Liste des factures</h1>
-      <div>les filtres</div>
       <div>
+        <InvoiceFilters applyFilters={applyFilters}/>
+      </div>
+      <div>
+        {loading && <p>Chargement en cours ...</p>}
+        {(invoiceList.length == 0 && !loading) && <p>Aucun résultat</p>}
         {invoiceList.length > 0 && (
           <table>
             <thead>
@@ -50,7 +77,6 @@ function InvoiceListView() {
             </tbody>
           </table>
         )}
-        {invoiceList.length == 0 && <p>Aucun résultat</p>}
       </div>
     </div>
   );
