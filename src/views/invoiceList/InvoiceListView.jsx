@@ -1,23 +1,25 @@
 import { useEffect, useState } from "react";
 import { getInvoices, getInvoicesBy } from "../../services/api/invoice";
 import InvoiceFilters from "../../components/invoiceFilters/InvoiceFilters";
+import InvoiceView from "../invoiceView/InvoiceView";
 
 function InvoiceListView() {
   const [invoiceList, setInvoiceList] = useState([]);
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [selectedRow, setSelectedRow ] = useState(null)
 
   useEffect(() => {
     const execAsync = async () => {
       try {
-        setLoading(true)
+        setLoading(true);
         const response = await getInvoices();
         setInvoiceList(response.data.data);
       } catch (err) {
         setError(err?.message);
         if (error) console.log(error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
     };
     execAsync();
@@ -25,32 +27,36 @@ function InvoiceListView() {
 
   const applyFilters = (filters) => {
     const execAsync = async () => {
-        try {
-            setLoading(true)
-            const response = await getInvoicesBy(filters)
-            setInvoiceList(response.data.data);
-        } catch (err) {
-            const errResponse = err?.response
-            if(errResponse?.data){
-                setError(errResponse.data);
-                setInvoiceList([])
-            }
-        } finally {
-            setLoading(false)
+      try {
+        setLoading(true);
+        const response = await getInvoicesBy(filters);
+        setInvoiceList(response.data.data);
+      } catch (err) {
+        const errResponse = err?.response;
+        if (errResponse?.data) {
+          setError(errResponse.data);
+          setInvoiceList([]);
         }
-    }
-    execAsync()
+      } finally {
+        setLoading(false);
+      }
+    };
+    execAsync();
+  };
+
+  const handlePreview = (invoice_number) => {
+    setSelectedRow(selectedRow === invoice_number? null : invoice_number)
   }
 
   return (
     <div>
       <h1>Liste des factures</h1>
       <div>
-        <InvoiceFilters applyFilters={applyFilters}/>
+        <InvoiceFilters applyFilters={applyFilters} />
       </div>
       <div>
         {loading && <p>Chargement en cours ...</p>}
-        {(invoiceList.length == 0 && !loading) && <p>Aucun résultat</p>}
+        {invoiceList.length == 0 && !loading && <p>Aucun résultat</p>}
         {invoiceList.length > 0 && (
           <table>
             <thead>
@@ -68,10 +74,23 @@ function InvoiceListView() {
                 <tr key={invoice.invoice_number}>
                   <td>{index + 1}</td>
                   <td>{invoice.invoice_number}</td>
-                  <td>{new Date(invoice.issue_date).toLocaleString("fr-FR", {day: "numeric", month: "numeric", year: "numeric"})}</td>
+                  <td>
+                    {new Date(invoice.issue_date).toLocaleString("fr-FR", {
+                      day: "numeric",
+                      month: "numeric",
+                      year: "numeric",
+                    })}
+                  </td>
                   <td>{`${invoice.school.name} - ${invoice.trainer.name} - ${invoice.subject.name}`}</td>
                   <td>{invoice.amount_ttc}</td>
-                  <td><button>Voir</button></td>
+                  <td>
+                    <button onClick={() => handlePreview(invoice.invoice_number)}>Voir</button>
+                    {
+                        selectedRow === invoice.invoice_number && (
+                            <InvoiceView invoice={invoice} />
+                        )
+                    }
+                  </td>
                 </tr>
               ))}
             </tbody>
