@@ -20,8 +20,7 @@ function InvoiceFilters({applyFilters}) {
 
     const handleSearchBy = (event) => {
         if(event.target.value == "year") {
-            setFilters({...filters, start_date: ""})
-            setFilters({...filters, end_date: ""})
+            setFilters({...filters, start_date: "", end_date: ""})
             setSearchBy(false)
         }else{
             setFilters({...filters, year: ""})
