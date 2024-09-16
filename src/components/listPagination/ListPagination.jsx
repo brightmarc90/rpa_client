@@ -35,6 +35,10 @@ const ListPagination = ({count, limit, changePage}) => {
         onPageChange={handleChangePage}
         rowsPerPage={rowsPerPage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        labelRowsPerPage="Éléments par page :"
+        labelDisplayedRows={({ from, to, count }) =>
+            `${from}-${to} sur ${count !== -1 ? count : `plus de ${to}`}`
+        }
       />
     </div>
   );

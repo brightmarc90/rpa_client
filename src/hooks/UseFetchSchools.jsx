@@ -11,7 +11,7 @@ const UseFetchSchools = () => {
             try {
                 setLoading(true)
                 const response = await getSchools()
-                setSchools(response.data)
+                setSchools(response.data.data)
             } catch (err) {
                 setError(err?.message)
             } finally {
