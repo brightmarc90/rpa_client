@@ -11,6 +11,7 @@ function InvoiceListView() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
+  const [listIndex, setListIndex] = useState(0)
 
   useEffect(() => {
     const execAsync = async () => {
@@ -58,6 +59,7 @@ function InvoiceListView() {
   };
 
   const changePage = (skip, limit) => {
+    setListIndex(skip)
     applyFilters(filters, skip, limit);
   };
 
@@ -86,7 +88,7 @@ function InvoiceListView() {
               <tbody>
                 {invoiceList.map((invoice, index) => (
                   <tr key={invoice.invoice_number}>
-                    <td>{index + 1}</td>
+                    <td>{listIndex + index + 1}</td>
                     <td>{invoice.invoice_number}</td>
                     <td>
                       {new Date(invoice.issue_date).toLocaleString("fr-FR", {
