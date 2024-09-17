@@ -5,8 +5,8 @@ import InvoiceView from "../invoiceView/InvoiceView";
 import ListPagination from "../../components/listPagination/ListPagination";
 
 function InvoiceListView() {
-    const [responseData, setResponseData] = useState(null)
-    const [filters, setFilters] = useState({})
+  const [responseData, setResponseData] = useState(null);
+  const [filters, setFilters] = useState({});
   const [invoiceList, setInvoiceList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -17,7 +17,7 @@ function InvoiceListView() {
       try {
         setLoading(true);
         const response = await getInvoices();
-        setResponseData(response.data)
+        setResponseData(response.data);
         setInvoiceList(response.data.data);
       } catch (err) {
         setError(err?.message);
@@ -27,16 +27,16 @@ function InvoiceListView() {
       }
     };
     execAsync();
-    console.log(responseData)
+    console.log(responseData);
   }, []);
 
   const applyFilters = (filtersObj, skip, limit) => {
-    console.log(skip, limit)
+    console.log(skip, limit);
     const execAsync = async () => {
       try {
         setLoading(true);
         const response = await getInvoicesBy(filtersObj, skip, limit);
-        setResponseData(response.data)
+        setResponseData(response.data);
         setInvoiceList(response.data.data);
       } catch (err) {
         const errResponse = err?.response;
@@ -46,11 +46,11 @@ function InvoiceListView() {
         }
       } finally {
         setLoading(false);
-        setFilters(filtersObj)
+        setFilters(filtersObj);
       }
     };
     execAsync();
-    console.log(filters)
+    console.log(filters);
   };
 
   const handlePreview = (invoice_number) => {
@@ -58,8 +58,8 @@ function InvoiceListView() {
   };
 
   const changePage = (skip, limit) => {
-    applyFilters(filters, skip, limit)
-  }
+    applyFilters(filters, skip, limit);
+  };
 
   return (
     <div>
@@ -111,7 +111,11 @@ function InvoiceListView() {
                 ))}
               </tbody>
             </table>
-            <ListPagination count={responseData.total} limit={responseData.limit} changePage={changePage} />
+            <ListPagination
+              count={responseData.total}
+              limit={responseData.limit}
+              changePage={changePage}
+            />
           </>
         )}
       </div>
