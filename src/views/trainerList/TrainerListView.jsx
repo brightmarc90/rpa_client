@@ -7,6 +7,7 @@ function TrainerListView() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [responseData, setResponseData] = useState(null);
+  const [listIndex, setListIndex] = useState(0)
 
   const execAsync = async (skip, limit) => {
     try {
@@ -27,6 +28,7 @@ function TrainerListView() {
   }, []);
 
   const changePage = (skip, limit) => {
+    setListIndex(skip)
     execAsync(skip, limit)
   }
 
@@ -48,7 +50,7 @@ function TrainerListView() {
               <tbody>
                 {trainerList.map((trainer, index) => (
                   <tr key={index}>
-                    <td>{index + 1}</td>
+                    <td>{listIndex + index + 1}</td>
                     <td>{trainer.name}</td>
                   </tr>
                 ))}

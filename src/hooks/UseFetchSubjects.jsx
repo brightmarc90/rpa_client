@@ -11,7 +11,7 @@ const UseFetchSubjects = () => {
             try {
                 setLoading(true)
                 const response = await getSubjects()
-                setSubjects(response.data)
+                setSubjects(response.data.data)
             } catch (err) {
                 setError(err?.message)
             } finally {
