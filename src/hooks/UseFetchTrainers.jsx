@@ -11,7 +11,7 @@ const UseFetchTrainers = () => {
             try {
                 setLoading(true)
                 const response = await getTrainers()
-                setTrainers(response.data)
+                setTrainers(response.data.data)
             } catch (err) {
                 setError(err?.message)
             } finally {
