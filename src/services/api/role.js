@@ -1,6 +1,9 @@
 import { publicInstance } from "./instance"
 
-export async function getRoles() {
-    const response = await publicInstance.get("/roles")
+export async function getRoles(skip, limit) {
+    let uri = ""
+    uri += skip? `skip=${skip}&` : ""
+    uri += limit? `limit=${limit}&` : ""
+    const response = await publicInstance.get(`/roles?${uri}`)
     return response
 }
