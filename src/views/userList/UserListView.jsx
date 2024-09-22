@@ -38,7 +38,7 @@ function UserListView() {
       <h1>Liste des utilisateurs</h1>
       <div>
         <div>
-          <Link to={"/"}>Nouvel utilisateur</Link>
+          <Link to={"/new-user"}>Nouvel utilisateur</Link>
         </div>
         <div>
           {loading && <p>Chargement en cours ...</p>}

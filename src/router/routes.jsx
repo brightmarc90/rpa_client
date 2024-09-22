@@ -7,6 +7,7 @@ import SubjectListView from "../views/subjectList/SubjectListView"
 import UserListView from "../views/userList/UserListView"
 import RoleListView from "../views/roleList/RoleListView"
 import InvoiceListView from "../views/invoiceList/InvoiceListView"
+import UserCreateView from "../views/userCreate/userCreateView"
 
 export default createBrowserRouter([
     {
@@ -36,6 +37,10 @@ export default createBrowserRouter([
             {
                 path: "invoices",
                 element: <InvoiceListView />
+            },
+            {
+                path: "new-user",
+                element: <UserCreateView />
             }
         ]
     }
